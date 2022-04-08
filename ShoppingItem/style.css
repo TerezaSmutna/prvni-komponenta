@@ -1,0 +1,28 @@
+.item {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  background-color: #e4e4e4;
+  padding: 1rem 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.item__name {
+  flex: 1;
+}
+
+.item__amount {
+  margin: 0 1rem;
+}
+
+.item__done {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.item__done--tick {
+  background-image: url(./img/tick.svg);
+}
+
