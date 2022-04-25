@@ -3,7 +3,8 @@
   align-items: center;
   list-style: none;
   background-color: #e4e4e4;
-  padding: 1rem 1.5rem;
+  border-radius: 5px;
+  padding: 0.75rem 1.25rem;
   margin-bottom: 0.5rem;
 }
 
@@ -15,14 +16,17 @@
   margin: 0 1rem;
 }
 
-.item__done {
+.item__btn-done {
   width: 1.5rem;
   height: 1.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-image: url(./img/nocheck.svg);
   background-size: contain;
   background-repeat: no-repeat;
 }
 
-.item__done--tick {
-  background-image: url(./img/tick.svg);
+.item__btn-done--check {
+  background-image: url(./img/check.svg);
 }
-

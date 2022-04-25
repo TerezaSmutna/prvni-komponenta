@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+  xmlns="http://www.w3.org/2000/svg"
+  version="1.1"
+  viewBox="0 0 256 256"
+  height="256"
+  width="256"
+>
+  <g
+    fill="none"
+    stroke="#444"
+    stroke-width="20"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+  > 
+    <path
+      d="M 223.35746,139.08849 A 96,96.000015 0 0 1 146.66791,222.16748 96,96.000015 0 0 1 44.084316,174.62789 96,96.000015 0 0 1 57.899184,62.41132 96,96.000015 0 0 1 168.95007,41.172057"
+    />
+    <path d="m 80,112 48,48 96,-96" />
+  </g>
+</svg>
