@@ -1,12 +1,15 @@
-import { ShoppingItem } from "./ShoppingItem/index.js";
+import { ShoppingList } from './ShoppingList/index.js';
 
-const renderShoppingList = (items) => {
-  const shoppingList = document.querySelector('.shopping-list');
-  shoppingList.innerHTML = items
-    .map((item) => ShoppingItem(item))
-    .join('');
-};
+const listsElement = document.querySelector('#lists');
 
-fetch('https://apps.kodim.cz/daweb/trening-api/apis/shopping')
+fetch('https://apps.kodim.cz/daweb/trening-api/apis/shopping/mon')
   .then((response) => response.json())
-  .then((data) => renderShoppingList(data));
+  .then((data) => {
+    listsElement.innerHTML += ShoppingList({ day: 'Pondělí', items: data });
+  });
+
+fetch('https://apps.kodim.cz/daweb/trening-api/apis/shopping/tue')
+  .then((response) => response.json())
+  .then((data) => {
+    listsElement.innerHTML += ShoppingList({ day: 'Úterý', items: data });
+  });

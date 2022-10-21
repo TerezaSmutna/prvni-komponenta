@@ -2,10 +2,6 @@ html {
   font-family: sans-serif;
 }
 
-.shopping-list {
-  padding: 0;
-}
-
 .container {
   max-width: 30rem;
   margin: 3rem auto;
