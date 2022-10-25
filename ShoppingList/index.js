@@ -1,7 +1,7 @@
 import { ShoppingItem } from "../ShoppingItem/index.js";
 
 export const ShoppingList = (props) => {
-  const { day, dayName, items = [] } = props;
+  const { day, dayName, items } = props;
 
   const element = document.createElement('div');
   element.classList.add('shopping-list');
@@ -10,7 +10,7 @@ export const ShoppingList = (props) => {
     <ul class="shopping-list__items"></ul>
   `;
   
-  if (items.length === 0) {
+  if (items === undefined) {
     fetch(`https://apps.kodim.cz/daweb/trening-api/apis/shopping/${day}`)
       .then((response) => response.json())
       .then((data) => {
@@ -20,10 +20,10 @@ export const ShoppingList = (props) => {
           items: data,
         }));
       });
+  } else {
+    const ulElement = element.querySelector('ul');
+    ulElement.append(...items.map((item) => ShoppingItem(item)));
   }
-
-  const ulElement = element.querySelector('ul');
-  ulElement.append(...items.map((item) => ShoppingItem(item)));
 
   return element;
 };
