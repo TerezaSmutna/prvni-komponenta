@@ -11,13 +11,13 @@ export const ShoppingList = (props) => {
   `;
   
   if (items === undefined) {
-    fetch(`https://apps.kodim.cz/daweb/trening-api/apis/shopping/${day}`)
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}`)
       .then((response) => response.json())
       .then((data) => {
         element.replaceWith(ShoppingList({
           day: day,
           dayName: dayName,
-          items: data,
+          items: data.results,
         }));
       });
   } else {
