@@ -1,5 +1,5 @@
 export const ShoppingItem = (props) => {
-  const { product, amount, unit, done } = props;
+  const { id, product, amount, unit, done } = props;
 
   let checkClass = '';
   if (done) {
@@ -14,12 +14,14 @@ export const ShoppingItem = (props) => {
     <button class="item__btn-done ${checkClass}"></button>
   `;
   element.querySelector('button').addEventListener('click', () => {
-    element.replaceWith(ShoppingItem({ 
-      product: product,
-      amount: amount,
-      unit: unit,
-      done: !done,
-    }));
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/mon/${id}`, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ done: !done }),
+    }).then((response) => response.json())
+      .then((data) => element.replaceWith(ShoppingItem(data.results)));
   });
 
   return element;
