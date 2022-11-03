@@ -21,7 +21,7 @@ export const ShoppingList = (props) => {
   `;
   
   if (items === undefined) {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}`)
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/${day}`)
       .then((response) => response.json())
       .then((data) => {
         element.replaceWith(ShoppingList({
@@ -46,7 +46,7 @@ tlacitko.addEventListener('click', (event) => {
   event.preventDefault();
   console.log(produkt.value);
 
-  /*fetch('https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/mon', {
+  fetch('https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/mon', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -57,10 +57,12 @@ tlacitko.addEventListener('click', (event) => {
       unit: jednotka.value,
       done: true,
     }),
-  })*/;
+  });
 
 });
 
 
   return element;
 };
+
+
