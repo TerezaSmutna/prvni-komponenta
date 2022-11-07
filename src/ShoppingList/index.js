@@ -2,7 +2,7 @@ import { ShoppingItem } from "../ShoppingItem/index.js";
 import './style.css';
 
 export const ShoppingList = (props) => {
-  const { day, dayName, items, onDelete } = props;
+  const { day, dayName, items } = props;
 
   const element = document.createElement('div');
   element.classList.add('shopping-list');
