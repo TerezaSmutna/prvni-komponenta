@@ -1,3 +1,5 @@
+import './style.css';
+
 export const ShoppingItem = (props) => {
   const { id, product, amount, unit, done } = props;
 

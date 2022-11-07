@@ -1,4 +1,5 @@
 import { ShoppingItem } from "../ShoppingItem/index.js";
+import './style.css';
 
 export const ShoppingList = (props) => {
   const { day, dayName, items } = props;
