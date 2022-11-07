@@ -27,6 +27,25 @@
   background-repeat: no-repeat;
 }
 
-.item__btn-done--check {
+.item__btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.5rem;
+  border: none;
+  cursor: pointer;
+  background-color: transparent;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.icon-check {
   background-image: url(./img/check.svg);
+}
+
+.icon-nocheck {
+  background-image: url(./img/nocheck.svg);
+}
+
+.icon-cross {
+  background-image: url(./img/cross.svg);
 }
