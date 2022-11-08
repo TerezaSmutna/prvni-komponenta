@@ -26,7 +26,7 @@ export const ShoppingList = (props) => {
   } 
   
   const handleDelete = (itemId) => {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/mon/${itemId}`, {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}/${itemId}`, {
       method: 'DELETE',
     }).then((response) => response.json())
       .then((data) => element.replaceWith(ShoppingList({
@@ -39,6 +39,7 @@ export const ShoppingList = (props) => {
   const ulElement = element.querySelector('ul');
   ulElement.append(...items.map((item) => ShoppingItem({ 
     item: item,
+    day: day,
     onDelete: handleDelete,
   })));
 
