@@ -35,7 +35,7 @@ export const ShoppingItem = (props) => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ amount: parseInt(element.querySelector('.item__amount').value), unit: unit}),
+    body: JSON.stringify({ amount: parseInt(element.querySelector('.item__amount').value)}),
   }).then((response) => response.json())
     .then((data) => element.replaceWith(ShoppingItem(data.results)));
 });

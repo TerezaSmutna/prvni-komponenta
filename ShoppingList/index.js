@@ -16,7 +16,13 @@ export const ShoppingList = (props) => {
         <input id="mnozstvi" type="text" name="input" required><br>
         <label>Jednotka: </label><br>
         <input id="jednotka" type="text" name="input" required><br>
-        <button id="tlacitko" type="submit">Přidat nový produkt</button>
+        <button id="tlacitko" type="submit">Přidat nový produkt</button><br><br>
+    </form>
+
+    <form class="formular2">
+    <label>Vymazat produkt</label><br>
+    <input id="vymazat" type="text" name="input" required><br>
+    <button id="tlacitkoDelete">ID produktu</button>
     </form>
   `;
   
@@ -30,12 +36,16 @@ export const ShoppingList = (props) => {
           items: data.results,
         }));
       });
+
+  
   } else {
     const ulElement = element.querySelector('ul');
     ulElement.append(...items.map((item) => ShoppingItem(item)));
   }
 
-  
+
+
+
   let produkt = element.querySelector("#produkt");
   let mnozstvi = element.querySelector("#mnozstvi");
   let jednotka = element.querySelector("#jednotka");
@@ -44,9 +54,8 @@ export const ShoppingList = (props) => {
 
 tlacitko.addEventListener('click', (event) => {
   event.preventDefault();
-  console.log(produkt.value);
 
-  fetch('https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/mon', {
+  fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/${day}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
@@ -54,15 +63,43 @@ tlacitko.addEventListener('click', (event) => {
     body: JSON.stringify({
       product: produkt.value,
       amount: mnozstvi.value,
-      unit: jednotka.value,
+      unit: jednotka.value, 
       done: true,
     }),
-  });
+  }).then((response) => response.json())
+  .then((data) => element.replaceWith(ShoppingList({
+    day: day,
+    dayName: dayName,
+    items: data.results,
+  })));
+}); 
 
+
+
+
+let vymazat = element.querySelector("#vymazat");
+let tlacitkoDelete = element.querySelector("#tlacitkoDelete");
+tlacitkoDelete.addEventListener('click', (event) => {
+  event.preventDefault();
+
+  fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/mon/${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({
+      id: vymazat.value, 
+      done: true,
+    }),
+  }).then((response) => response.json())
+  .then((data) => element.replaceWith(ShoppingList({
+    day: day,
+    dayName: dayName,
+    items: data.results,
+  })));
 });
 
 
   return element;
 };
-
 
