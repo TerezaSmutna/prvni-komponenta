@@ -1,7 +1,8 @@
 import './style.css';
 
 export const ShoppingItem = (props) => {
-  const { id, product, amount, unit, done } = props;
+  const { item, onDelete } = props;
+  const { id, product, amount, unit, done } = item;
 
   let checkClass = 'icon-nocheck';
   if (done) {
@@ -13,10 +14,10 @@ export const ShoppingItem = (props) => {
   element.innerHTML = `
     <div class="item__name">${product}</div>
     <div class="item__amount">${amount} ${unit}</div>
-    <button class="item__btn ${checkClass}"></button>
-    <button class="item__btn icon-cross"></button>
+    <button class="btn-check item__btn ${checkClass}"></button>
+    <button class="btn-delete item__btn icon-cross"></button>
   `;
-  element.querySelector('button').addEventListener('click', () => {
+  element.querySelector('.btn-check').addEventListener('click', () => {
     fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/mon/${id}`, {
       method: 'PATCH',
       headers: {
@@ -24,7 +25,10 @@ export const ShoppingItem = (props) => {
       },
       body: JSON.stringify({ done: !done }),
     }).then((response) => response.json())
-      .then((data) => element.replaceWith(ShoppingItem(data.results)));
+      .then((data) => element.replaceWith(ShoppingItem({ item: data.results })));
+  });
+  element.querySelector('.btn-delete').addEventListener('click', () => {
+    onDelete(id);
   });
 
   return element;

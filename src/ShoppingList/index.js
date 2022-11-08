@@ -21,10 +21,26 @@ export const ShoppingList = (props) => {
           items: data.results,
         }));
       });
-  } else {
-    const ulElement = element.querySelector('ul');
-    ulElement.append(...items.map((item) => ShoppingItem(item)));
+
+    return element;
+  } 
+  
+  const handleDelete = (itemId) => {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/mon/${itemId}`, {
+      method: 'DELETE',
+    }).then((response) => response.json())
+      .then((data) => element.replaceWith(ShoppingList({
+        day: day,
+        dayName: dayName,
+        items: data.results,
+      })));
   }
+  
+  const ulElement = element.querySelector('ul');
+  ulElement.append(...items.map((item) => ShoppingItem({ 
+    item: item,
+    onDelete: handleDelete,
+  })));
 
   return element;
 };
