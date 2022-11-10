@@ -49,3 +49,11 @@
 .icon-cross {
   background-image: url(./img/cross.svg);
 }
+
+.arrow-down {
+  background-image: url(./img/arrow-down.svg);
+}
+
+.arrow-up {
+  background-image: url(./img/arrow-up.svg);
+}

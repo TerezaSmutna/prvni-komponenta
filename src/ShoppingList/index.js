@@ -12,7 +12,7 @@ export const ShoppingList = (props) => {
   `;
   
   if (items === undefined) {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}`)
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/${day}`)
       .then((response) => response.json())
       .then((data) => {
         element.replaceWith(ShoppingList({
@@ -26,7 +26,7 @@ export const ShoppingList = (props) => {
   } 
   
   const handleDelete = (itemId) => {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}/${itemId}`, {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/${day}/${itemId}`, {
       method: 'DELETE',
     }).then((response) => response.json())
       .then((data) => element.replaceWith(ShoppingList({
@@ -35,12 +35,48 @@ export const ShoppingList = (props) => {
         items: data.results,
       })));
   }
-  
+
+  const handleMoveDown = (itemId) => {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/${day}/${itemId}/actions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        type: "moveDown"
+      }),
+    }).then((response) => response.json())
+      .then((data) => element.replaceWith(ShoppingList({
+        day: day,
+        dayName: dayName,
+        items: data.results,
+      })));
+  }
+
+  const handleMoveUp = (itemId) => {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/${day}/${itemId}/actions`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify({
+        type: "moveUp"
+      }),
+    }).then((response) => response.json())
+      .then((data) => element.replaceWith(ShoppingList({
+        day: day,
+        dayName: dayName,
+        items: data.results,
+      })));
+  }
+
   const ulElement = element.querySelector('ul');
   ulElement.append(...items.map((item) => ShoppingItem({ 
     item: item,
     day: day,
     onDelete: handleDelete,
+    onMoveUp: handleMoveUp,
+    onMoveDown: handleMoveDown,
   })));
 
   return element;
