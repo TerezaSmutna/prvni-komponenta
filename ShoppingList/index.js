@@ -44,8 +44,6 @@ export const ShoppingList = (props) => {
   }
 
 
-
-
   let produkt = element.querySelector("#produkt");
   let mnozstvi = element.querySelector("#mnozstvi");
   let jednotka = element.querySelector("#jednotka");
@@ -73,31 +71,6 @@ tlacitko.addEventListener('click', (event) => {
     items: data.results,
   })));
 }); 
-
-
-
-
-let vymazat = element.querySelector("#vymazat");
-let tlacitkoDelete = element.querySelector("#tlacitkoDelete");
-tlacitkoDelete.addEventListener('click', (event) => {
-  event.preventDefault();
-
-  fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/41/days/mon/${id}`, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      id: vymazat.value, 
-      done: true,
-    }),
-  }).then((response) => response.json())
-  .then((data) => element.replaceWith(ShoppingList({
-    day: day,
-    dayName: dayName,
-    items: data.results,
-  })));
-});
 
 
   return element;
