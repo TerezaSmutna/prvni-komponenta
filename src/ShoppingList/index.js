@@ -31,7 +31,7 @@ export const ShoppingList = (props) => {
   } 
   
   const handleDelete = (itemId) => {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/me/week/${day}/${itemId}`, {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/me/week/${day}/items/${itemId}`, {
       method: 'DELETE',
       headers: {
         'Authorization': `Bearer ${window.localStorage.getItem('authToken')}`,
