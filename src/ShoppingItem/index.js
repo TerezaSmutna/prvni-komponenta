@@ -18,7 +18,7 @@ export const ShoppingItem = (props) => {
     <button class="btn-delete item__btn icon-cross"></button>
   `;
   element.querySelector('.btn-check').addEventListener('click', () => {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/${day}/${id}`, {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/${day}/items/${id}`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ export const ShoppingItem = (props) => {
       body: JSON.stringify({ done: !done }),
     }).then((response) => response.json())
       .then((data) => element.replaceWith(ShoppingItem({ 
-        item: data.results.items,
+        item: data.results,
         day: day,
         onDelete: onDelete,
       })));
