@@ -12,13 +12,13 @@ export const ShoppingList = (props) => {
   `;
   
   if (items === undefined) {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}`)
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/${day}`)
       .then((response) => response.json())
       .then((data) => {
         element.replaceWith(ShoppingList({
           day: day,
           dayName: dayName,
-          items: data.results,
+          items: data.results.items,
         }));
       });
 
@@ -26,13 +26,13 @@ export const ShoppingList = (props) => {
   } 
   
   const handleDelete = (itemId) => {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/days/${day}/${itemId}`, {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/${day}/${itemId}`, {
       method: 'DELETE',
     }).then((response) => response.json())
       .then((data) => element.replaceWith(ShoppingList({
         day: day,
         dayName: dayName,
-        items: data.results,
+        items: data.results.items,
       })));
   }
   

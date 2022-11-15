@@ -10,6 +10,9 @@ module.exports = {
     filename: 'bundle.js',
     assetModuleFilename: 'img/[name]-[hash:6].[ext]'
   },
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules: [
       {
