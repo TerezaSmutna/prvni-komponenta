@@ -27,7 +27,7 @@ export const LoginPage = (props) => {
         <label class="form-field">
           Heslo: <input class="password-input" type="password" />
         </label>
-        <button type="submit">Registrovat</button>
+        <button type="submit">Přihlásit</button>
       </form>
     </div>
   `;

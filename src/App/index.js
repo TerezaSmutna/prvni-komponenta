@@ -5,6 +5,7 @@ import { RegisterPage } from '../RegisterPage/index.js';
 
 export const App = (props) => {
   let { session } = props;
+  console.log('session', session);
 
   const element = document.createElement('div');
   element.classList.add('app');
@@ -21,13 +22,14 @@ export const App = (props) => {
         },
       }).then((response) => response.json())
         .then((data) => {
-          element.replaceWith(
-            App({ 
-              session: {
-                user: data.results.email,
-              }}
-            )
-          );
+          if (data.status === 'unauthorized') {
+            session = 'no-session';
+          } else {
+            session = {
+              user: data.results.email,
+            };
+          }
+          element.replaceWith(App({ session: session }));
         });
     }
   }
