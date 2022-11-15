@@ -1,20 +1,33 @@
 import './style.css';
 
-export const LoginPage = ({ session }) => {
+export const LoginPage = (props) => {
+  const { error, session } = props;
+
   if (session !== undefined && session !== 'no-session') {
     window.location.href = '/';
     return null;
   }
   
+  let alert = '';
+
+  if (error !== undefined) {
+    alert = `<div class="alert">${error}</div>`;
+  }
+
   const element = document.createElement('div');
   element.classList.add('page');
   element.innerHTML = `
     <div class="container">
       <h1>Přihlásit</h1>
+      ${alert}
       <form>
-        <label class="form-field">E-mail: <input type="email" /></label>
-        <label class="form-field">Heslo: <input type="password" /></label>
-        <button type="submit">Přihlásit</button>
+        <label class="form-field">
+          E-mail: <input class="email-input" type="email" />
+        </label>
+        <label class="form-field">
+          Heslo: <input class="password-input" type="password" />
+        </label>
+        <button type="submit">Registrovat</button>
       </form>
     </div>
   `;
@@ -22,7 +35,7 @@ export const LoginPage = ({ session }) => {
   element.querySelector('form').addEventListener('submit', (e) => {
     e.preventDefault();
     const email = element.querySelector('.email-input').value;
-    const password = element.querySelector('.email-input').value;
+    const password = element.querySelector('.password-input').value;
 
     fetch('https://apps.kodim.cz/daweb/shoplist/api/login', {
       method: 'POST',
@@ -33,9 +46,12 @@ export const LoginPage = ({ session }) => {
     }).then((response) => response.json())
       .then((data) => {
         if (data.status === 'success') {
+          localStorage.setItem('authToken', data.results.token);
           window.location.href = '/';
         } else {
-          element.replaceWith(RegisterPage({ error: data.errors[0]}));
+          element.replaceWith(
+            LoginPage({ error: data.errors[0], session })
+          );
         }
       });
   });
