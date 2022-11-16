@@ -12,7 +12,12 @@ export const ShoppingList = (props) => {
   `;
   
   if (items === undefined) {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/${day}`)
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/me/week/${day}`, {
+      method: 'GET',
+      headers: {
+        'Authorization': 'Basic terka.kop@seznam.cz:terka.kop@seznam.cz',
+      }
+    })
       .then((response) => response.json())
       .then((data) => {
         element.replaceWith(ShoppingList({
@@ -26,8 +31,11 @@ export const ShoppingList = (props) => {
   } 
   
   const handleDelete = (itemId) => {
-    fetch(`https://apps.kodim.cz/daweb/shoplist/api/weeks/0/${day}/items/${itemId}`, {
+    fetch(`https://apps.kodim.cz/daweb/shoplist/api/me/week/${day}/items/${itemId}`, {
       method: 'DELETE',
+      headers: {
+        'Authorization': 'Basic terka.kop@seznam.cz:terka.kop@seznam.cz',
+      }
     }).then((response) => response.json())
       .then((data) => element.replaceWith(ShoppingList({
         day: day,

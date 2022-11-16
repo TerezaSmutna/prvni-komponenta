@@ -2,7 +2,6 @@ import './style.css';
 
 export const Header = () => {
   const element = document.createElement('header');
-  element.classList.add('shopping-list');
   element.innerHTML = `
     <div class="container">  
       <nav>
