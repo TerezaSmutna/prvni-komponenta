@@ -2,6 +2,7 @@ import { Header } from '../Header/index.js';
 import { HomePage } from '../HomePage/index.js';
 import { LoginPage } from '../LoginPage/index.js';
 import { RegisterPage } from '../RegisterPage/index.js';
+import { AccountPage } from '../AccountPage/index.js';
 
 export const App = (props) => {
   let { session } = props;
@@ -43,7 +44,8 @@ export const App = (props) => {
     element.append(LoginPage({ session }));
   } else if (pathname === '/register') {
     element.append(RegisterPage({ session }));
+  } else if (pathname === '/account') {
+    element.append(AccountPage({ session }));
   }
-
   return element;
 };
